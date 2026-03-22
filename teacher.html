@@ -32,10 +32,10 @@ db.ref("call").on("value", function(snapshot) {
   var data = snapshot.val();
   if(data){
     document.getElementById("display").innerText =
-      "🔔 請 " + data.name + " 到門口準備回家";
+      "🔔 請 " + data.name + " 到廁所準備大便";
 
     var msg = new SpeechSynthesisUtterance(
-      data.name + "，請到門口準備回家"
+      data.name + "，請到廁所準備大便"
     );
     msg.lang = "zh-TW";
     speechSynthesis.speak(msg);
