@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>教室顯示</title>
+<style>
+body { text-align:center; font-family:Arial; margin-top:50px; background:#f5f5f5;}
+#display { font-size:48px; color:#333; margin-top:50px;}
+</style>
+</head>
+
+<body>
+
+<h1 id="display">等待叫號...</h1>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+// Firebase 設定
+var firebaseConfig = {
+  apiKey: "AIzaSyDYOjQbfTzY4Fd7usxhG-EkucDHv1TmQzY",
+  authDomain: "broadcast-6259d.firebaseapp.com",
+  databaseURL: "https://broadcast-6259d-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "broadcast-6259d",
+};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
+
+// 即時監聽
+db.ref("call").on("value", function(snapshot) {
+  var data = snapshot.val();
+  if(data){
+    document.getElementById("display").innerText =
+      "🔔 請 " + data.name + " 到門口準備回家";
+
+    var msg = new SpeechSynthesisUtterance(
+      data.name + "，請到門口準備回家"
+    );
+    msg.lang = "zh-TW";
+    speechSynthesis.speak(msg);
+  }
+});
+</script>
+
+</body>
+</html>
