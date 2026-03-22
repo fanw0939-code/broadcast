@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>家長接送</title>
+<style>
+body { text-align:center; font-family:Arial; margin-top:50px;}
+button { font-size:24px; padding:15px 30px; margin:10px; border-radius:10px; border:none; background:#4CAF50; color:white; cursor:pointer;}
+</style>
+</head>
+
+<body>
+
+<h2>請選擇學生</h2>
+
+<button onclick="call('范勻菲')">范勻菲</button>
+<button onclick="call('小華')">小華</button>
+<button onclick="call('小美')">小美</button>
+<button onclick="call('小安')">小安</button>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+// Firebase 設定
+var firebaseConfig = {
+  apiKey: "AIzaSyDYOjQbfTzY4Fd7usxhG-EkucDHv1TmQzY",
+  authDomain: "broadcast-6259d.firebaseapp.com",
+  databaseURL: "https://broadcast-6259d-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "broadcast-6259d",
+};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
+
+// 點名功能
+function call(name){
+  db.ref("call").set({
+    name: name,
+    time: Date.now()
+  });
+  alert(name + " 已叫"); // 點擊確認
+}
+</script>
+
+</body>
+</html>
